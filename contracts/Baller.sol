@@ -81,8 +81,9 @@ contract Baller is ERC721, Ownable {
   function claimBaller(uint _ballerId) public {
     address ownerOfRequestedBaller = ownerOf(_ballerId);
 
-    if (ownerOfRequestedBaller == address(this)) {
-      _transfer(address(this), msg.sender, _ballerId);
-    }
+    require(balanceOf(msg.sender) < 5);
+    require(ownerOfRequestedBaller == address(this));
+
+    _transfer(address(this), msg.sender, _ballerId);
   }
 }
