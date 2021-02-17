@@ -70,11 +70,19 @@ contract Baller is ERC721, Ownable {
   function mintNewBallers(uint amount) public onlyOwner {
     for(uint i=0;i<amount;i++) {
       uint256 newBallerId = _generateNewBaller();
-      _mint(owner(), newBallerId);
+      _mint(address(this), newBallerId);
     }
   }
 
   function getBallersCount() public view returns (uint) {
     return ballers.length;
+  }
+
+  function claimBaller(uint _ballerId) public {
+    address ownerOfRequestedBaller = ownerOf(_ballerId);
+
+    if (ownerOfRequestedBaller == address(this)) {
+      _transfer(address(this), msg.sender, _ballerId);
+    }
   }
 }
