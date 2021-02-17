@@ -1,0 +1,25 @@
+{
+  "name": "crypto-ballers",
+  "version": "0.0.1",
+  "description": "Learning Solidity and Ethereum/Blockchain development! Inspired by the [cryptozombies](https://cryptozombies.io) tutorial, this project extends ideas from the initial lessons further.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilhelmWillie/crypto-ballers.git"
+  },
+  "author": "Wilhelm Willie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilhelmWillie/crypto-ballers/issues"
+  },
+  "homepage": "https://github.com/WilhelmWillie/crypto-ballers#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.4.0"
+  }
+}
