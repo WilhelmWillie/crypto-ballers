@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/WilhelmWillie/crypto-ballers#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^3.4.0"
+    "@openzeppelin/contracts": "^3.4.0",
+    "truffle": "^5.1.66"
   }
 }
