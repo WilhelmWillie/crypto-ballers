@@ -51,6 +51,6 @@ contract("Baller", accounts => {
     await ballerInstance.releaseBaller(5, { from: bob });
 
     ownerOfBaller5 = await ballerInstance.ownerOf(5);
-    assert.not.equal(ownerOfBaller5, bob, "Bob does not own baller 5");
+    assert.notEqual(ownerOfBaller5, bob, "Bob does not own baller 5");
   });
 });
