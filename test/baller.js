@@ -40,7 +40,7 @@ contract("Baller", accounts => {
     assert.equal(bobBallerCount, 5, "Bob should have 5 ballers");
   });
 
-  it("...should allow Bob to release a baller", async () => {
+  it("...should allow Bob to release a baller he owns", async () => {
     const bob = accounts[1];
 
     const ballerInstance = await Baller.deployed();
@@ -52,5 +52,21 @@ contract("Baller", accounts => {
 
     ownerOfBaller5 = await ballerInstance.ownerOf(5);
     assert.notEqual(ownerOfBaller5, bob, "Bob does not own baller 5");
+  });
+
+  it("...should not allow Alice to release a baller she doesn't own", async () => {
+    const [alice, bob] = accounts;
+
+    const ballerInstance = await Baller.deployed();
+
+    let ownerOfBaller6 = await ballerInstance.ownerOf(6);
+    assert.equal(ownerOfBaller6, bob, "Bob owns baller 6");
+
+    try {
+      await ballerInstance.releaseBaller(6, { from: alice });
+      assert.fail("The transaction should have thrown an error");
+    } catch(err) {
+      assert.include(err.message, "revert", "The error message should contain 'revert'");
+    }
   });
 });
