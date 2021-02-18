@@ -39,4 +39,18 @@ contract("Baller", accounts => {
     const bobBallerCount = await ballerInstance.balanceOf(bob);
     assert.equal(bobBallerCount, 5, "Bob should have 5 ballers");
   });
+
+  it("...should allow Bob to release a baller", async () => {
+    const bob = accounts[1];
+
+    const ballerInstance = await Baller.deployed();
+
+    let ownerOfBaller5 = await ballerInstance.ownerOf(5);
+    assert.equal(ownerOfBaller5, bob, "Bob owns baller 5");
+
+    await ballerInstance.releaseBaller(5, { from: bob });
+
+    ownerOfBaller5 = await ballerInstance.ownerOf(5);
+    assert.not.equal(ownerOfBaller5, bob, "Bob does not own baller 5");
+  });
 });

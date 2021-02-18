@@ -86,4 +86,11 @@ contract Baller is ERC721, Ownable {
 
     _transfer(address(this), msg.sender, _ballerId);
   }
+
+  function releaseBaller(uint _ballerId) public {
+    address ownerOfRequestedBaller = ownerOf(_ballerId);
+    require(ownerOfRequestedBaller == msg.sender);
+
+    _transfer(msg.sender, address(this), _ballerId);
+  }
 }
