@@ -101,4 +101,18 @@ contract Baller is ERC721, Ownable {
     _transfer(msg.sender, address(this), _ballerId);
     emit Release(msg.sender, _ballerId);
   }
+
+  function getTokensByOwner(address _owner) public view returns(uint[] memory tokenIds) {
+    uint[] memory result = new uint[](balanceOf(_owner));
+
+    uint counter = 0;
+    for(uint i=0;i<ballers.length;i++) {
+      if (ownerOf(i) == _owner) {
+        result[counter] = i;
+        counter++;
+      }
+    }
+
+    return result;
+  }
 }
