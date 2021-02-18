@@ -32,6 +32,11 @@ contract Baller is ERC721, Ownable {
     uint defensiveRating;
   }
 
+  // Events
+  event Mint(uint _ballerId);
+  event Claim(address _claimer, uint _ballerId);
+  event Release(address _releaser, uint _ballerId);
+
   CryptoBaller[] public ballers;
 
   constructor() ERC721("CryptoBaller", "BALLER") {}
@@ -62,8 +67,9 @@ contract Baller is ERC721, Ownable {
     uint newBallerId = _ballerIds.current();
 
     ballers.push(CryptoBaller(newBallerId, randomPosition, randomOffensiveRating, randomDefensiveRating));
-    _ballerIds.increment();
+    emit Mint(newBallerId);
 
+    _ballerIds.increment();
     return newBallerId;
   }
 
@@ -85,6 +91,7 @@ contract Baller is ERC721, Ownable {
     require(ownerOfRequestedBaller == address(this));
 
     _transfer(address(this), msg.sender, _ballerId);
+    emit Claim(msg.sender, _ballerId);
   }
 
   function releaseBaller(uint _ballerId) public {
@@ -92,5 +99,6 @@ contract Baller is ERC721, Ownable {
     require(ownerOfRequestedBaller == msg.sender);
 
     _transfer(msg.sender, address(this), _ballerId);
+    emit Release(msg.sender, _ballerId);
   }
 }
