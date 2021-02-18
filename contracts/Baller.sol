@@ -115,4 +115,18 @@ contract Baller is ERC721, Ownable {
 
     return result;
   }
+
+  function getUnclaimedTokens() public view returns(uint[] memory tokenIds) {
+    uint[] memory result = new uint[](balanceOf(address(this)));
+
+    uint counter = 0;
+    for(uint i=0;i<ballers.length;i++) {
+      if (ownerOf(i) == address(this)) {
+        result[counter] = i;
+        counter++;
+      }
+    }
+
+    return result;
+  }
 }
