@@ -1,23 +1,20 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 
-import Web3Context from "../context/Web3Context";
-import useBallers from "../hooks/useBallers";
+import BallersContext from "../context/BallersContext";
 
 import Baller from "./Baller";
 
 const UnclaimedBallers = () => {
-  const { contract } = useContext(Web3Context);
-
-  const ballers = useBallers(contract.methods.getUnclaimedTokens());
+  const { unclaimedBallers } = useContext(BallersContext);
 
   const ballerItems = useMemo(() => {
-    if (ballers) {
-      return (ballers.map(baller => (
+    if (unclaimedBallers) {
+      return (unclaimedBallers.map(baller => (
         <Baller data={baller} key={baller.id} canClaim />
       )))
     }
-  }, [ballers]);
+  }, [unclaimedBallers]);
 
   return (
     <UnclaimedBallersWrapper>
@@ -31,7 +28,7 @@ const UnclaimedBallers = () => {
 }
 
 const UnclaimedBallersWrapper = styled.div`
-  flex-basis: 49%;
+  flex-basis: 66%;
   padding: 32px;
   border: 1px solid #D4D7DB;
 
@@ -42,6 +39,9 @@ const UnclaimedBallersWrapper = styled.div`
 
 const Ballers = styled.div`
   margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
 `;
 
 export default UnclaimedBallers;

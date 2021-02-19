@@ -10,8 +10,7 @@ const Header = () => {
 }
 
 const HeaderWrapper = styled.header`
-  width: 100%;
-  max-width: 960px;
+  width: 90%;
   margin: 32px auto;
   padding: 32px;
   border: 1px solid #D4D7DB;

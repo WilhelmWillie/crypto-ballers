@@ -1,23 +1,20 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 
-import Web3Context from "../context/Web3Context";
-import useBallers from "../hooks/useBallers";
+import BallersContext from "../context/BallersContext";
 
 import Baller from "./Baller";
 
 const YourBallers = () => {
-  const { contract, accounts } = useContext(Web3Context);
-
-  const ballers = useBallers(contract.methods.getTokensByOwner(accounts[0]));
+  const { ownedBallers } = useContext(BallersContext);
 
   const ballerItems = useMemo(() => {
-    if (ballers) {
-      return (ballers.map(baller => (
+    if (ownedBallers) {
+      return (ownedBallers.map(baller => (
         <Baller data={baller} key={baller.id} canRelease />
       )))
     }
-  }, [ballers]);
+  }, [ownedBallers]);
 
   return (
     <YourBallersWrapper>
@@ -31,7 +28,7 @@ const YourBallers = () => {
 }
 
 const YourBallersWrapper = styled.div`
-  flex-basis: 49%;
+  flex-basis: 33%;
   padding: 32px;
   border: 1px solid #D4D7DB;
 
@@ -42,6 +39,9 @@ const YourBallersWrapper = styled.div`
 
 const Ballers = styled.div`
   margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
 `;
 
 export default YourBallers;

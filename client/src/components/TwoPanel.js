@@ -14,8 +14,7 @@ const TwoPanel = ({
 const TwoPanelWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  max-width: 960px;
+  width: 90%;
   margin: 32px auto;
   padding: 16px;
   border: 1px solid #D4D7DB;

@@ -72,12 +72,8 @@ const Baller = ({
 }
 
 const BallerWrapper = styled.div`
-  padding-bottom: 16px;
-  border-bottom: 1px solid #EDEDED;
-
-  :last-child {
-    border-bottom: none;
-  }
+  padding: 16px;
+  background: #EBEEF0;
 `;
 
 export default Baller;
