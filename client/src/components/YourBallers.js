@@ -11,7 +11,7 @@ const YourBallers = () => {
   const ballerItems = useMemo(() => {
     if (ownedBallers) {
       return (ownedBallers.map(baller => (
-        <Baller data={baller} key={baller.id} canRelease />
+        <Baller data={baller} key={`owned-${baller.id}`} canRelease />
       )))
     }
   }, [ownedBallers]);
