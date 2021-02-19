@@ -14,7 +14,7 @@ const UnclaimedBallers = () => {
   const ballerItems = useMemo(() => {
     if (ballers) {
       return (ballers.map(baller => (
-        <Baller data={baller} key={baller.id} />
+        <Baller data={baller} key={baller.id} canClaim />
       )))
     }
   }, [ballers]);
