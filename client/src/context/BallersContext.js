@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 
 import Web3Context from "./Web3Context";
 import useBallers from "../hooks/useBallers";
@@ -11,8 +11,28 @@ const BallersProvider = ({children}) => {
     accounts
   } = useContext(Web3Context);
 
-  const unclaimedBallers = useBallers(contract.methods.getUnclaimedTokens());
-  const ownedBallers = useBallers(contract.methods.getTokensByOwner(accounts[0]));
+  const [unclaimedBallers, addUnclaimedBallerId, removeUnclaimedBallerId] = useBallers(contract.methods.getUnclaimedTokens());
+  const [ownedBallers, addOwnedBallerId, removeOwnedBallerId] = useBallers(contract.methods.getTokensByOwner(accounts[0]));
+
+  useEffect(() => {
+    contract.events.Claim({ filter: { _claimer: accounts[0] } }).on(
+      "data",
+      (event) => {
+        const ballerId = event.returnValues._ballerId;
+        addOwnedBallerId(ballerId);
+        removeUnclaimedBallerId(ballerId);
+      }
+    );
+
+    contract.events.Release({ filter: { _releaser: accounts[0] } }).on(
+      "data",
+      (event) => {
+        const ballerId = event.returnValues._ballerId;
+        addUnclaimedBallerId(ballerId);
+        removeOwnedBallerId(ballerId);
+      }
+    );
+  }, []);
 
   return (
     <BallersContext.Provider value={{

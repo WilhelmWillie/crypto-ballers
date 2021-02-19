@@ -1,23 +1,46 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 
 import Web3Context from "../context/Web3Context";
 
 function useBallers(method) {
   const { contract } = useContext(Web3Context);
 
-  const [ballers, setBallers] = useState(null);
-  const [ballerIds, setBallerIds] = useState(null);
+  const [ballers, setBallers] = useState([]);
+  const [ballerIds, setBallerIds] = useState([]);
 
+  const addBallerId = useCallback((id) => {
+    setBallerIds((prevBallerIds) => (
+      [
+        ...prevBallerIds,
+        id,
+      ]
+    ));
+  }, [ballerIds]);
+
+  const removeBallerId = useCallback((id) => {
+    setBallerIds((prevBallerIds) => (
+      prevBallerIds.filter(_id => _id !== id)
+    ));
+  }, [ballerIds]);
+
+  // Get all of the baller IDs using the provided method
   useEffect(() => {
     const getBallerIds = async () => {
       const _ballerIds = await method.call(); 
       setBallerIds(_ballerIds);
     }
 
-    getBallerIds();
+    if (contract) {
+      getBallerIds();
+    }
   }, [contract]);
 
+  // Get data for each baller once they come in
   useEffect(() => {
+    console.log({
+      message: 'Change detected',
+      ballerIds,
+    })
     const getBallers = async () => {
       if (ballerIds) {
         const _ballers = [];
@@ -39,7 +62,7 @@ function useBallers(method) {
     getBallers();
   }, [ballerIds]);
 
-  return ballers;
+  return [ballers, addBallerId, removeBallerId];
 }
 
 export default useBallers;
