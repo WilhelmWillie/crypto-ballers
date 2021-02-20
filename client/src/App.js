@@ -8,8 +8,6 @@ import TwoPanel from "./components/TwoPanel";
 import YourBallers from "./components/YourBallers";
 import UnclaimedBallers from "./components/UnclaimedBallers";
 
-import "./App.css";
-
 const App = () => {
   return (
     <Web3Provider>

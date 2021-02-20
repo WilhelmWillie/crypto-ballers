@@ -28,20 +28,21 @@ const UnclaimedBallers = () => {
 }
 
 const UnclaimedBallersWrapper = styled.div`
-  flex-basis: 66%;
-  padding: 32px;
-  border: 1px solid #D4D7DB;
+  flex-grow: 1;
+  margin-right: 32px;
 
   h2 {
-    margin: 0;
+    margin: 8px 0 0;
+    color: #2A2A2A;
+    font-size: 32px;
   }
 `;
 
 const Ballers = styled.div`
   margin-top: 32px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 32px;
 `;
 
 export default UnclaimedBallers;

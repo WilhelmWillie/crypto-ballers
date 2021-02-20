@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Container from "./styles/Container";
+
 const TwoPanel = ({
   children
 }) => {
@@ -11,14 +13,10 @@ const TwoPanel = ({
   )
 }
 
-const TwoPanelWrapper = styled.div`
+const TwoPanelWrapper = styled(Container)`
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  margin: 32px auto;
-  padding: 16px;
-  border: 1px solid #D4D7DB;
-  text-align: center;
+  margin: 48px auto;
 `;
 
 export default TwoPanel;

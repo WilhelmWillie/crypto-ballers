@@ -15,7 +15,7 @@ const BallersProvider = ({children}) => {
   const [ownedBallers, addOwnedBallerId, removeOwnedBallerId] = useBallers(contract.methods.getTokensByOwner(accounts[0]));
 
   useEffect(() => {
-    contract.events.Claim({ filter: { _claimer: accounts[0] } }).on(
+    const claimEvent = contract.events.Claim({ filter: { _claimer: accounts[0] } }).on(
       "data",
       (event) => {
         const ballerId = event.returnValues._ballerId;
@@ -24,7 +24,7 @@ const BallersProvider = ({children}) => {
       }
     );
 
-    contract.events.Release({ filter: { _releaser: accounts[0] } }).on(
+    const releaseEvent = contract.events.Release({ filter: { _releaser: accounts[0] } }).on(
       "data",
       (event) => {
         const ballerId = event.returnValues._ballerId;
@@ -32,6 +32,12 @@ const BallersProvider = ({children}) => {
         removeOwnedBallerId(ballerId);
       }
     );
+
+    return () => {
+      // Clean up events
+      claimEvent.unsubscribe();
+      releaseEvent.unsubscribe();
+    }
   }, []);
 
   return (

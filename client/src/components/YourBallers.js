@@ -28,12 +28,17 @@ const YourBallers = () => {
 }
 
 const YourBallersWrapper = styled.div`
-  flex-basis: 33%;
+  align-self: flex-start;
+  width: 100%;
+  max-width: 400px;
   padding: 32px;
-  border: 1px solid #D4D7DB;
+  background: #F9F8F8;
+  border-radius: 12px;
 
   h2 {
-    margin: 0;
+    margin: 8px 0 0;
+    color: #2A2A2A;
+    font-size: 32px;
   }
 `;
 

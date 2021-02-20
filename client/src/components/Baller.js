@@ -43,28 +43,42 @@ const Baller = ({
 
   return (
     <BallerWrapper>
-      <h3>#{id} - Pos: {positionLabel}</h3>
-      <p>
-        <b>Offensive Rating = {offensiveRating}</b>
-      </p>
+      <NumberAndPosition>
+        <NumberBig>{id}</NumberBig>
 
-      <p>
-        <b>Defensive Rating = {defensiveRating}</b>
-      </p>
+        <Position>{positionLabel}</Position>
+      </NumberAndPosition>
+
+      <Stats>
+        <Stat>
+          <Label>Off</Label>
+          <Rating>{offensiveRating}</Rating>
+        </Stat>
+
+        <Stat>
+          <Label>Def</Label>
+          <Rating>{defensiveRating}</Rating>
+        </Stat>
+
+        <Stat>
+          <Label>Ovr</Label>
+          <Rating>{Math.floor((parseFloat(offensiveRating) + parseFloat(defensiveRating))/2.0)}</Rating>
+        </Stat>
+      </Stats>
 
       {
         canClaim && (
-          <button onClick={claimBaller}>
+          <Button onClick={claimBaller} isClaim>
             Claim
-          </button>
+          </Button>
         )
       }
 
       {
         canRelease && (
-          <button onClick={releaseBaller}>
+          <Button onClick={releaseBaller}>
             Release
-          </button>
+          </Button>
         )
       }
     </BallerWrapper>
@@ -72,8 +86,69 @@ const Baller = ({
 }
 
 const BallerWrapper = styled.div`
-  padding: 16px;
-  background: #EBEEF0;
+  background: #F9F8F8;
+  border-radius: 8px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+`;
+
+const NumberAndPosition = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+const NumberBig = styled.span`
+  font-size: 72px;
+  font-weight: 600;
+  padding-right: 24px;
+  color: #747b89;
+`;
+
+const Position = styled.span`
+  font-size: 32px;
+  font-weight: 600;
+  color: #44567b;
+`;
+
+const Stats = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 18px;
+  padding-bottom: 24px;
+`;
+
+const Stat = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+
+const Label = styled.span`
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  padding-bottom: 12px;
+`;
+
+const Rating = styled.span`
+  font-size: 24px;
+`;
+
+const Button = styled.button`
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  padding: 16px 0;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  background-color: ${({isClaim}) => isClaim ? '#6E9075' : '#CE2D4F'};
 `;
 
 export default Baller;
