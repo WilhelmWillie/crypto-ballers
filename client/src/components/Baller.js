@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
 
-import Web3Context from "../context/Web3Context";
+import Web3Context from "context/Web3Context";
 
 const Baller = ({
   data,

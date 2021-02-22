@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 
-import useWeb3 from "../hooks/useWeb3";
-import Loading from "../components/Loading";
+import useWeb3 from "hooks/useWeb3";
+import Loading from "components/Loading";
 
 const Web3Context = createContext(null);
 

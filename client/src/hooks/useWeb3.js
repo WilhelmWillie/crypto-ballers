@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 
-import BallerContract from "../contracts/Baller.json";
-import getWeb3 from "../getWeb3";
+import BallerContract from "contracts/Baller.json";
+import getWeb3 from "utils/getWeb3";
 
 function useWeb3() {
   const [web3, setWeb3] = useState(null);

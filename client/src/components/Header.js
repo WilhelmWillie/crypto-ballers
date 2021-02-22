@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 
-import Web3Context from "../context/Web3Context";
+import Web3Context from "context/Web3Context";
 
 import Container from "./styles/Container";
 

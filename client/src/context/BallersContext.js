@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect } from "react";
 
+import useBallers from "hooks/useBallers";
+
 import Web3Context from "./Web3Context";
-import useBallers from "../hooks/useBallers";
 
 const BallersContext = createContext(null);
 

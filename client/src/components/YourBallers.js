@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 
-import BallersContext from "../context/BallersContext";
+import BallersContext from "context/BallersContext";
 
 import Baller from "./Baller";
 

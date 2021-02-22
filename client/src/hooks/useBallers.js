@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 
-import Web3Context from "../context/Web3Context";
+import Web3Context from "context/Web3Context";
 
 function useBallers(method) {
   const { contract } = useContext(Web3Context);
