@@ -30,6 +30,11 @@ contract Baller is ERC721, Ownable {
       Random number from 1-99 that indicates the baller's ability to prevent points
     */
     uint defensiveRating;
+
+    /* 
+      Store rating data as a big random integer, instead of separate rating ints
+    */
+    uint data;
   }
 
   // Events
