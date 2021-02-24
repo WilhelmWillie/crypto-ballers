@@ -71,7 +71,7 @@ contract Baller is ERC721, Ownable {
     uint randomDefensiveRating = _generateRandomNumber(99);
     uint newBallerId = _ballerIds.current();
 
-    ballers.push(CryptoBaller(newBallerId, randomPosition, randomOffensiveRating, randomDefensiveRating));
+    ballers.push(CryptoBaller(newBallerId, randomPosition, randomOffensiveRating, randomDefensiveRating, 0));
     emit Mint(newBallerId);
 
     _ballerIds.increment();
