@@ -46,12 +46,12 @@ function useBallers(method) {
         const _ballers = [];
         
         for (const ballerId of ballerIds) {
-          const { id, position, offensiveRating, defensiveRating } = await contract.methods.ballers(ballerId).call();
+          const { id, data, ownerAssignedNumber, ownerAssignedName } = await contract.methods.ballers(ballerId).call();
           _ballers.push({
             id,
-            position,
-            offensiveRating,
-            defensiveRating
+            data,
+            ownerAssignedNumber,
+            ownerAssignedName
           });
         }
 

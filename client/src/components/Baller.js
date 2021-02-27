@@ -2,18 +2,19 @@ import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
 
 import Web3Context from "context/Web3Context";
+import getBallerFromData from "utils/getBallerFromData";
 
 const Baller = ({
-  data,
+  baller,
   canClaim,
   canRelease
 }) => {
   const {
     id,
-    position,
-    offensiveRating,
-    defensiveRating
-  } = data;
+    data,
+    ownerAssignedNumber,
+    ownerAssignedName,
+  } = baller;
 
   const { contract, accounts } = useContext(Web3Context);
 
@@ -33,24 +34,20 @@ const Baller = ({
     }
   }, [id, contract]);
 
-  const positionLabel = (
-    position === '5' ? 'C' :
-    position === '4' ? 'PF' :
-    position === '3' ? 'SF' :
-    position === '2' ? 'SG' :
-    position === '1' ? 'PG' : 'N/A'
-  );
+  const ballerData = getBallerFromData(data);
+  console.log(ballerData);
 
   return (
     <BallerWrapper>
       <NumberAndPosition>
         <NumberBig>{id}</NumberBig>
 
-        <Position>{positionLabel}</Position>
+        <Position>C</Position>
       </NumberAndPosition>
 
       <Stats>
-        <Stat>
+        {data}
+        {/* <Stat>
           <Label>Off</Label>
           <Rating>{offensiveRating}</Rating>
         </Stat>
@@ -63,7 +60,7 @@ const Baller = ({
         <Stat>
           <Label>Ovr</Label>
           <Rating>{Math.floor((parseFloat(offensiveRating) + parseFloat(defensiveRating))/2.0)}</Rating>
-        </Stat>
+        </Stat> */}
       </Stats>
 
       {
@@ -114,7 +111,7 @@ const Position = styled.span`
 
 const Stats = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   padding-top: 18px;
   padding-bottom: 24px;
 `;
