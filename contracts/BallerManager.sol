@@ -24,4 +24,18 @@ contract BallerManager is BallerFactory {
     _transfer(msg.sender, address(this), _ballerId);
     emit Release(msg.sender, _ballerId);
   }
+
+  function renameBaller(uint _ballerId, string memory _newName) public {
+    address ownerOfRequestedBaller = ownerOf(_ballerId);
+    require(ownerOfRequestedBaller == msg.sender);
+
+    ballers[_ballerId].ownerAssignedName = _newName;
+  }
+
+  function renumberBaller(uint _ballerId, string uint8 _newNumber) public {
+    address ownerOfRequestedBaller = ownerOf(_ballerId);
+    require(ownerOfRequestedBaller == msg.sender);
+
+    ballers[_ballerId].ownerAssignedNumber = _newNumber;
+  }
 }
