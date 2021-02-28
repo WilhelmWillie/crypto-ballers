@@ -28,12 +28,8 @@ const YourBallers = () => {
 }
 
 const YourBallersWrapper = styled.div`
-  align-self: flex-start;
-  width: 100%;
-  max-width: 400px;
-  padding: 32px;
-  background: #F9F8F8;
-  border-radius: 12px;
+  flex-grow: 1;
+  margin-right: 32px;
 
   h2 {
     margin: 8px 0 0;
@@ -45,8 +41,8 @@ const YourBallersWrapper = styled.div`
 const Ballers = styled.div`
   margin-top: 32px;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 32px;
 `;
 
 export default YourBallers;
