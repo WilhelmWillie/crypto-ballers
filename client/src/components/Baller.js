@@ -34,33 +34,52 @@ const Baller = ({
     }
   }, [id, contract]);
 
-  const ballerData = getBallerFromData(data);
-  console.log(ballerData);
+  const { position, outsideScoring, insideScoring, defense, rebounding, playmaking, athleticism } = getBallerFromData(data);
 
   return (
     <BallerWrapper>
       <NumberAndPosition>
         <NumberBig>{id}</NumberBig>
 
-        <Position>C</Position>
+        <Position>{position}</Position>
       </NumberAndPosition>
 
+      <NameWrapper>
+        <Name>
+          {ownerAssignedName || 'No Name'}
+        </Name>
+      </NameWrapper>
+
       <Stats>
-        {data}
-        {/* <Stat>
-          <Label>Off</Label>
-          <Rating>{offensiveRating}</Rating>
+        <Stat>
+          <Label>OUT</Label>
+          <Rating>{outsideScoring}</Rating>
         </Stat>
 
         <Stat>
-          <Label>Def</Label>
-          <Rating>{defensiveRating}</Rating>
+          <Label>INS</Label>
+          <Rating>{insideScoring}</Rating>
         </Stat>
 
         <Stat>
-          <Label>Ovr</Label>
-          <Rating>{Math.floor((parseFloat(offensiveRating) + parseFloat(defensiveRating))/2.0)}</Rating>
-        </Stat> */}
+          <Label>DEF</Label>
+          <Rating>{defense}</Rating>
+        </Stat>
+
+        <Stat>
+          <Label>REB</Label>
+          <Rating>{rebounding}</Rating>
+        </Stat>
+
+        <Stat>
+          <Label>PLA</Label>
+          <Rating>{playmaking}</Rating>
+        </Stat>
+
+        <Stat>
+          <Label>ATH</Label>
+          <Rating>{athleticism}</Rating>
+        </Stat>
       </Stats>
 
       {
@@ -103,6 +122,20 @@ const NumberBig = styled.span`
   color: #747b89;
 `;
 
+const NameWrapper = styled.div`
+  text-align: center;
+  padding: 24px 0;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  margin: 24px;
+`;
+
+const Name = styled.p`
+  font-size: 18px;
+  margin: 0;
+  font-weight: 500;
+`;
+
 const Position = styled.span`
   font-size: 32px;
   font-weight: 600;
@@ -112,8 +145,7 @@ const Position = styled.span`
 const Stats = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding-top: 18px;
-  padding-bottom: 24px;
+  padding: 18px 16px 24px;
 `;
 
 const Stat = styled.div`
@@ -125,12 +157,12 @@ const Stat = styled.div`
 const Label = styled.span`
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   padding-bottom: 12px;
 `;
 
 const Rating = styled.span`
-  font-size: 24px;
+  font-size: 20px;
 `;
 
 const Button = styled.button`
