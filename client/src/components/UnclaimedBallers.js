@@ -11,14 +11,14 @@ const UnclaimedBallers = () => {
   const ballerItems = useMemo(() => {
     if (unclaimedBallers) {
       return (unclaimedBallers.map(baller => (
-        <Baller baller={baller} key={`unclaimed-${baller.id}`} canClaim />
+        <Baller baller={baller} key={`available-${baller.id}`} canClaim />
       )))
     }
   }, [unclaimedBallers]);
 
   return (
     <UnclaimedBallersWrapper>
-      <h2>Unclaimed Ballers</h2>
+      <h2>Available Ballers</h2>
 
       <Ballers>
         {ballerItems}
@@ -41,7 +41,7 @@ const UnclaimedBallersWrapper = styled.div`
 const Ballers = styled.div`
   margin-top: 32px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 32px;
 `;
 

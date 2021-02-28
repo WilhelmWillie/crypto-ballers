@@ -1,5 +1,8 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
+import { 
+  Link
+} from "react-router-dom";
 
 import Web3Context from "context/Web3Context";
 
@@ -23,6 +26,11 @@ const Header = () => {
     <Wrapper>
       <StyledContainer>
         <Logo>Crypto Ballers</Logo>
+
+        <Navigation>
+          <Link to="/">Dashboard</Link>
+          <Link to="/collection">Your Collection</Link>
+        </Navigation>
 
         <Address>
           <Blip />
@@ -50,6 +58,14 @@ const StyledContainer = styled(Container)`
 const Logo = styled.h1`
   font-size: 24px;
   text-transform: uppercase;
+`;
+
+const Navigation = styled.div`
+  a {
+    text-decoration: none;
+    color: #FFFFFF;
+    margin: 0 16px;
+  }
 `;
 
 const Address = styled.div`
