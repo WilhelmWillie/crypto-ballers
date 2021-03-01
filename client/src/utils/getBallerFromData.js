@@ -12,6 +12,8 @@ function getPositionFromRawData(rawData) {
       return 'PF';
     case 4:
       return 'C';
+    default:
+      return 'N/A';
   }
 }
 
