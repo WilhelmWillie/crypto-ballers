@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <Wrapper>
       <StyledContainer>
-        <Logo>Crypto Ballers</Logo>
+        <Logo><Link to="/">Crypto Ballers</Link></Logo>
 
         <Navigation>
           <Link to="/">Dashboard</Link>
@@ -51,16 +51,23 @@ const Wrapper = styled.header`
 const StyledContainer = styled(Container)`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 `;
 
 const Logo = styled.h1`
   font-size: 24px;
   text-transform: uppercase;
+  margin-right: 32px;
+
+  a {
+    text-decoration: none;
+    color: #FFFFFF;
+  }
 `;
 
 const Navigation = styled.div`
+  flex-grow: 1;
+
   a {
     text-decoration: none;
     color: #FFFFFF;
