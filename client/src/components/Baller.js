@@ -177,7 +177,7 @@ const Button = styled.button`
   color: #FFFFFF;
   cursor: pointer;
 
-  background-color: ${({isClaim}) => isClaim ? '#6E9075' : '#CE2D4F'};
+  background-color: ${({isClaim, theme}) => isClaim ? theme.colors.green : theme.colors.red};
 `;
 
 export default Baller;

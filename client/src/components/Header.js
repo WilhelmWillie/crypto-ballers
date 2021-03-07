@@ -44,8 +44,8 @@ const Header = () => {
 const Wrapper = styled.header`
   width: 100%;
   padding: 16px 0;
-  background: #2B303A;
-  color: #F9F8F8;
+  background: ${p => p.theme.colors.dark};
+  color: ${p => p.theme.colors.light};
 `;
 
 const StyledContainer = styled(Container)`
