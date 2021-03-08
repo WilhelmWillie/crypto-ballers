@@ -41,7 +41,7 @@ const YourBallersWrapper = styled.div`
 const Ballers = styled.div`
   margin-top: 32px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 32px;
 `;
 

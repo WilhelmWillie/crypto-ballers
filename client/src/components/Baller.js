@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Web3Context from "context/Web3Context";
 import getBallerFromData from "utils/getBallerFromData";
 
+import Jersey from "./Jersey";
+
 const Baller = ({
   baller,
   canClaim,
@@ -34,21 +36,11 @@ const Baller = ({
     }
   }, [id, contract]);
 
-  const { position, outsideScoring, insideScoring, defense, rebounding, playmaking, athleticism } = getBallerFromData(data);
+  const { outsideScoring, insideScoring, defense, rebounding, playmaking, athleticism } = getBallerFromData(data);
 
   return (
     <BallerWrapper>
-      <NumberAndPosition>
-        <NumberBig>{id}</NumberBig>
-
-        <Position>{position}</Position>
-      </NumberAndPosition>
-
-      <NameWrapper>
-        <Name>
-          {ownerAssignedName || 'No Name'}
-        </Name>
-      </NameWrapper>
+      <Jersey fill={`#${Number(data).toString(16).substring(0,6)}`} name={ownerAssignedName} number={ownerAssignedNumber} />
 
       <Stats>
         <Stat>
@@ -82,70 +74,35 @@ const Baller = ({
         </Stat>
       </Stats>
 
-      {
-        canClaim && (
-          <Button onClick={claimBaller} isClaim>
-            Claim
-          </Button>
-        )
-      }
+      <Actions>
+        {
+          canClaim && (
+            <Button onClick={claimBaller}>
+              Claim
+            </Button>
+          )
+        }
 
-      {
-        canRelease && (
-          <Button onClick={releaseBaller}>
-            Release
-          </Button>
-        )
-      }
+        {
+          canRelease && (
+            <Button onClick={releaseBaller}>
+              Release
+            </Button>
+          )
+        }
+      </Actions>
     </BallerWrapper>
   )
 }
 
 const BallerWrapper = styled.div`
-  background: #F9F8F8;
-  border-radius: 8px;
-  padding-top: 32px;
-  padding-bottom: 32px;
-`;
-
-const NumberAndPosition = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-`;
-
-const NumberBig = styled.span`
-  font-size: 72px;
-  font-weight: 600;
-  padding-right: 24px;
-  color: #747b89;
-`;
-
-const NameWrapper = styled.div`
-  text-align: center;
-  padding: 24px 0;
-  border-top: 1px solid #CCCCCC;
-  border-bottom: 1px solid #CCCCCC;
-  margin: 24px;
-`;
-
-const Name = styled.p`
-  font-size: 18px;
-  margin: 0;
-  font-weight: 500;
-`;
-
-const Position = styled.span`
-  font-size: 32px;
-  font-weight: 600;
-  color: #44567b;
 `;
 
 const Stats = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   padding: 18px 16px 24px;
+  background: #FFFFFF;
 `;
 
 const Stat = styled.div`
@@ -165,19 +122,16 @@ const Rating = styled.span`
   font-size: 20px;
 `;
 
-const Button = styled.button`
-  display: block;
-  width: 80%;
-  margin: 0 auto;
-  padding: 16px 0;
-  font-size: 18px;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  color: #FFFFFF;
-  cursor: pointer;
+const Actions = styled.div`
+  background: #FDF8F8;
+  padding: 16px 24px;
+`;
 
-  background-color: ${({isClaim, theme}) => isClaim ? theme.colors.green : theme.colors.red};
+const Button = styled.a`
+  color: #B2ACAC;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
 `;
 
 export default Baller;
