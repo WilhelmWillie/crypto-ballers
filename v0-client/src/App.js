@@ -13,6 +13,7 @@ import Header from "components/Header";
 
 import Dashboard from "views/Dashboard";
 import Collection from "views/Collection";
+import Mint from "views/Mint";
 
 import theme from 'styles/theme';
 import GlobalStyle from 'styles/GlobalStyle';
@@ -33,6 +34,10 @@ const App = () => {
 
               <Route path="/collection">
                 <Collection />
+              </Route>
+
+              <Route path="/mint">
+                <Mint />
               </Route>
             </Switch>
           </BallersProvider>

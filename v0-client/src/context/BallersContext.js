@@ -16,6 +16,14 @@ const BallersProvider = ({children}) => {
   const [ownedBallers, addOwnedBallerId, removeOwnedBallerId] = useBallers(contract.methods.getTokensByOwner(accounts[0]));
 
   useEffect(() => {
+    const mintEvent = contract.events.Mint({ filter: { _minter: accounts[0] } }).on(
+      "data",
+      (event) => {
+        const ballerId = event.returnValues._ballerId;
+        addOwnedBallerId(ballerId);
+      }
+    );
+
     const claimEvent = contract.events.Claim({ filter: { _claimer: accounts[0] } }).on(
       "data",
       (event) => {
@@ -36,10 +44,11 @@ const BallersProvider = ({children}) => {
 
     return () => {
       // Clean up events
+      mintEvent.unsubscribe();
       claimEvent.unsubscribe();
       releaseEvent.unsubscribe();
     }
-  }, []);
+  }, [contract]);
 
   return (
     <BallersContext.Provider value={{
