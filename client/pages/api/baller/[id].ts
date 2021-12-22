@@ -68,7 +68,7 @@ export default async function handler(
   
   const instance = new web3.eth.Contract(
     (BallersContract as any).abi,
-    '0x534c40D6636c5BA5681300A81C63117517541eAC',
+    '0xdab7F406896631388d5a92954ee126f771ECE293',
   );
 
   const ballerDNA = await instance.methods.getBallerDNA(req.query.id).call()

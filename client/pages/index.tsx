@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import type { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 import getWeb3 from '../utils/getWeb3';
+import Baller from '../components/Baller';
 
 import BallersContract from "../contracts/Ballers.json";
 
@@ -91,7 +92,7 @@ const Home: NextPage = () => {
       <ul>
         {
           ownedBallerIds.map(ballerId => (
-            <li key={ballerId}>{ballerId}</li>
+            <Baller key={ballerId} ballerId={ballerId} />
           ))
         }
       </ul>

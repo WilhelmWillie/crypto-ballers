@@ -14,6 +14,7 @@ contract Ballers is ERC721, Ownable {
 
   uint256 public constant MAXIMUM_BALLERS_PER_WALLET = 5;
   uint256 public constant DRAFT_PRICE = 0.01 ether;
+  string public baseURI = "";
   
   event Draft(address _minter, uint _ballerId);
 
@@ -70,6 +71,9 @@ contract Ballers is ERC721, Ownable {
   /*
     ==== Admin only methods ====
   */
+  function setBaseURI(string calldata _newBaseURI) external onlyOwner {
+    baseURI = _newBaseURI;
+  }
 
   /*
     ==== Read-write public methods ====
@@ -117,5 +121,12 @@ contract Ballers is ERC721, Ownable {
 
   function getBallerDNA(uint _ballerId) public view returns (uint dna) {
     return ballers[_ballerId].dna;
+  }
+
+  /*
+    === Override private methods ===
+  */
+  function _baseURI() override internal view virtual returns (string memory) {
+    return baseURI;
   }
 }
