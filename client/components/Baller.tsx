@@ -1,8 +1,14 @@
 import { useEffect, useState} from 'react';
+import styled from 'styled-components';
 
 type Props = {
   ballerId: number;
 }
+
+const BallerWrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+`;
 
 function Baller({ ballerId } : Props) {
   const [data, setData] = useState<any>();
@@ -18,8 +24,7 @@ function Baller({ ballerId } : Props) {
   }, [ballerId]);
 
   return (
-    data ? (<li>
-      <div>
+    data ? (<BallerWrapper>
         <h3>{data.name}</h3>
         <p><b>Position: </b> {data.attributes.position}</p>
         <p><b>Shooting: </b> {data.attributes.ratings.shooting}</p>
@@ -27,8 +32,7 @@ function Baller({ ballerId } : Props) {
         <p><b>Playmaking: </b> {data.attributes.ratings.playmaking}</p>
         <p><b>Defense: </b> {data.attributes.ratings.defense}</p>
         <p><b>Athleticism: </b> {data.attributes.ratings.athleticism}</p>
-      </div>
-    </li>) : null
+        </BallerWrapper>) : null
   )
 }
 

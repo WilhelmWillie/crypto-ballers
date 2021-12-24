@@ -1,7 +1,14 @@
 import type { NextPage } from 'next'
+import styled from 'styled-components';
 
 import Baller from '../components/Baller';
 import { useBallers } from '../hooks/useBallers';
+
+const BallersContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 const Roster: NextPage = () => {
   const {
@@ -12,13 +19,13 @@ const Roster: NextPage = () => {
     <div>
       <h1>Your Roster</h1>
 
-      <div>
+      <BallersContainer>
         {
           ownedBallerIds.map(ballerId => (
             <Baller key={ballerId} ballerId={ballerId} />
           ))
         }
-      </div>
+      </BallersContainer>
     </div>
   )
 }
