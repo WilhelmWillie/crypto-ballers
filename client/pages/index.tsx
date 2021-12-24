@@ -2,60 +2,51 @@ import { useEffect, useState, useCallback } from 'react';
 
 import type { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
-import getWeb3 from '../utils/getWeb3';
 import Baller from '../components/Baller';
 
 import BallersContract from "../contracts/Ballers.json";
+import { useWeb3 } from '../hooks/useWeb3';
 
 const Home: NextPage = () => {
-  const [web3, setWeb3] = useState<any>(null);
-  const [accounts, setAccounts] = useState<any>(null);
   const [contract, setContract] = useState<any>(null);
   const [ownedBallerIds, setOwnedBallerIds] = useState<Array<number>>([]);
   
+  const {
+    web3,
+    accounts,
+    networkId
+  } = useWeb3();
+  
   useEffect(() => {
-    const connectToContract = async () => {
-      try {
-        // Get network provider and web3 instance.
-        const web3 = await getWeb3();
-  
-        // Use web3 to get the user's accounts.
-        const accounts = await web3.eth.getAccounts();
-  
-        // Get the contract instance.
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = (BallersContract as any).networks[networkId];
-        const instance = new web3.eth.Contract(
-          (BallersContract as any).abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-  
-        // Set web3, accounts, and contract to the state
-        setWeb3(web3);
-        setAccounts(accounts);
-        setContract(instance);
-      } catch (error) {
-        // Catch any errors for any of the above operations.
-        alert(
-          `Failed to load web3, accounts, or contract. Check console for details.`,
-        );
-        console.error(error);
-      }
+    try {
+      if (!web3 || !networkId) return; 
+
+      // Get the contract instance.
+      const deployedNetwork = (BallersContract as any).networks[networkId];
+      const instance = new web3.eth.Contract(
+        (BallersContract as any).abi,
+        deployedNetwork && deployedNetwork.address,
+      );
+
+      // Set contract to the state
+      setContract(instance);
+    } catch (error) {
+      // Catch any errors for any of the above operations.
+      alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`,
+      );
+      console.error(error);
     }
-
-    connectToContract();
-  }, []);
+  }, [web3, networkId]);
 
   useEffect(() => {
-    if (web3 && accounts && contract) {
+    if (accounts && contract) {
       const getBallerIds = async () => {
         const ballerIds = await contract.methods.getBallersByOwner(accounts[0]).call(); 
         setOwnedBallerIds(ballerIds);
       }
   
-      if (contract) {
-        getBallerIds();
-      }
+      getBallerIds();
 
       const draftEvent = contract.events.Draft({ filter: { _minter: accounts[0] } }).on(
         "data",
@@ -69,7 +60,7 @@ const Home: NextPage = () => {
         draftEvent.unsubscribe();
       }
     }
-  }, [web3, accounts, contract, ownedBallerIds]);
+  }, [accounts, contract, ownedBallerIds]);
 
   const handleDraftClick = useCallback(async () => {
     if (web3 && accounts && contract) {
