@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, createContext, FunctionComponent } from 'react'; 
+import { useCallback, useEffect, useState, createContext, FunctionComponent } from 'react'; 
 
 import BallersContract from "../contracts/Ballers.json";
 import { useWeb3 } from '../hooks/useWeb3';

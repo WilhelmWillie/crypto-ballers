@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, FunctionComponent } from 'react';
+import { useEffect, useState, createContext, FunctionComponent } from 'react';
 
 import Web3 from "web3";
 
